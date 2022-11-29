@@ -1,0 +1,104 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" >
+    <!-- Bootstrap link -->
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <title>React App</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+<!-- Dropify Link Start -->
+<link rel="stylesheet" href="dropify.min.css">
+<link rel="stylesheet" href="dropify.css">
+<!-- Dropify Link End -->
+<!-- Jquery Link -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" ></script> -->
+<!-- Jquery Link End -->
+<!-- Dropify Js -->
+<script src="dropify.js"></script>
+<script src="dropify.min.js"></script>
+<!-- <script src="../src/js/dropify-1.js"></script> -->
+<!-- Dropify Js -->
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+      }
+      </style>
+  
+  
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <div id="root"></div>
+    <!-- <input type="file" id="input-file-now" class="dropify" /> -->
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
+    <script>
+      $(document).ready(function(){
+          // Basic
+          $('.dropify').dropify();
+
+          // Translated
+          $('.dropify-fr').dropify({
+              messages: {
+                  default: 'Glissez-déposez un fichier ici ou cliquez',
+                  replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                  remove:  'Supprimer',
+                  error:   'Désolé, le fichier trop volumineux'
+              }
+          });
+
+          // Used events
+          var drEvent = $('#input-file-events').dropify();
+
+          drEvent.on('dropify.beforeClear', function(event, element){
+              return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+          });
+
+          drEvent.on('dropify.afterClear', function(event, element){
+              alert('File deleted');
+          });
+
+          drEvent.on('dropify.errors', function(event, element){
+              console.log('Has Errors');
+          });
+
+          var drDestroy = $('#input-file-to-destroy').dropify();
+          drDestroy = drDestroy.data('dropify')
+          $('#toggleDropify').on('click', function(e){
+              e.preventDefault();
+              if (drDestroy.isDropified()) {
+                  drDestroy.destroy();
+              } else {
+                  drDestroy.init();
+              }
+          })
+      });
+  </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" ></script>
+  </body>
+</html>

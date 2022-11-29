@@ -1,0 +1,118 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'); */
+
+:root{
+    --open-sans: 'Open Sans', sans-serif;
+    --railway: 'Raleway', sans-serif;
+}
+
+.footer-social
+{
+    display: flex;
+    gap: 0.5rem;
+}
+.footer-social div{
+    padding: 1rem;
+    border-radius: 50%;
+    color: white;
+    
+}
+.footer-social .social-icons{
+font-size: 2rem;
+}
+.Links-styling
+{
+    text-decoration: none;
+    font-weight: 300;
+    font-family: var(--open-sans);
+ 
+    color:white
+}
+.Links-styling :hover
+{
+    color: rgb(224, 235, 233);
+    font-size: 1.25rem;
+
+}
+.parent-icons
+{
+    text-decoration: none;
+    color: white;
+}
+
+#Insta:hover{
+    background-image: linear-gradient(30deg, rgb(230, 107, 127),rgb(212, 6, 40) );
+    color: #e6ccb3;    
+    border-radius: 8px;
+}
+#Facebook:hover{
+    background-image: linear-gradient(30deg, rgb(51, 71, 141), rgb(30, 70, 133)  );
+    color: #e6ccb3;    
+    border-radius: 8px;
+}
+#Github:hover{
+    background-image: linear-gradient(30deg, #171515,black );
+    color: #e6ccb3;    
+    border-radius: 8px;
+}
+#Linkedin:hover{
+    background-image: linear-gradient(30deg, #0072b1 ,rgb(98, 94, 226) );
+    color: #e6ccb3;    
+    border-radius: 8px;
+}
+#Google:hover{
+    background-image: linear-gradient(30deg, #db4a39 ,rgb(223, 81, 81) );
+    color: #e6ccb3;    
+    border-radius: 8px;
+}
+#Twitter:hover{
+    background-image: linear-gradient(30deg, #00acee  ,rgb(7, 108, 125) );
+    color: #e6ccb3;    
+    border-radius: 8px;
+}
+.cotainer{
+    /* background-image: url("bg.jpg"); */
+    position: relative;
+}
+
+
+
+.service-padding{
+    padding: 0px 2.5rem;
+}
+.subscribe{
+    border-bottom: 1px solid white;
+    width: 100%;
+    height: 45px;
+    outline: none;
+    font-family: var(--open-sans);
+    background-color: transparent;
+    color: white;
+}
+.subscribe-btn{
+    border-bottom: 1px solid white;
+    padding: 10px 15px;
+    /* border-radius: 20px; */
+    margin-top: 20px;
+    font-weight: 700;
+    font-family: var(--open-sans);
+    color: white;
+}
+.footer h5{
+
+    font-family: var(--railway);
+    font-weight: 700;
+
+}
+.footer{
+
+   background-color: #0170e3;
+   color: white;
+
+}
+.footer p{
+
+    font-family: var(--open-sans);
+    font-size: 14px;
+    font-weight: 100;
+ 
+ }

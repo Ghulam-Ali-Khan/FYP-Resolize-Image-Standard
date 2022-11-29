@@ -1,0 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  text-decoration: none;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.nav-links {
+  position: fixed;
+  top: 300px;
+  left: 100%;
+  transform: translateX(-50px);
+  z-index: 10;
+}
+.nav-links a {
+  display: flex;
+  width: 300px;
+  padding: 13px 15px;
+  border-radius: 20px 0px 0px 20px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  text-decoration: none;
+}
+.nav-links a span {
+  margin-right: 10px;
+  font-size: 30px;
+}
+.nav-links a:hover {
+  text-decoration: none;
+  color: black;
+}
+.nav-links .editor,
+.nav-links .object-remover {
+  margin: 15px 0px;
+  border-radius: 20px 0px 0px 20px;
+  transition: all 0.5s ease-in;
+}
+.nav-links .object-remover {
+  background-color: #f7b101;
+}
+.nav-links .editor {
+  background-color: #ff2e5f;
+}
+.nav-links .editor:hover {
+  transform: translateX(-150px);
+}
+.nav-links .object-remover:hover {
+  transform: translateX(-180px);
+}
+
+.floating-home {
+  position: fixed;
+  bottom: 50px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  left: 100%;
+  transform: translateX(-50px);
+}
+.floating-home a {
+  padding: 10px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #019468;
+}
+
+.hero-section-content {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto 0px;
+}
+.hero-section-content h1 {
+  font-size: 55px;
+  font-weight: 900;
+  font-family: "Raleway", sans-serif;
+}
+.hero-section-content h1 span {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
+.hero-section-content p {
+  font-size: 15px;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+}
+.hero-section-content button {
+  font-size: 18px;
+  color: white;
+  font-weight: 700;
+  border-radius: 30px;
+  display: flex;
+  gap: 10px;
+  padding: 15px 30px;
+}
+.hero-section-content button:nth-child(1) {
+  background-color: white;
+  border: 2px solid #019468;
+  color: #019468;
+}
+.hero-section-content button:nth-child(2) {
+  background-color: white;
+  border: 2px solid #ff2e5f;
+  color: #ff2e5f;
+}
+.hero-section-content button:nth-child(1):hover {
+  background-color: #019468;
+  color: white;
+}
+.hero-section-content button:nth-child(2):hover {
+  background-color: #ff2e5f;
+  color: white;
+}
+
+.hero-section {
+  background-size: cover;
+  background-position: center;
+}
+
+.how-it-works {
+  margin: 50px 0px;
+  padding: 0px 50px;
+}
+.how-it-works .content {
+  max-width: 500px;
+  padding: 30px 40px;
+  margin-left: 50px;
+}
+.how-it-works .content h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #0170e3;
+}
+.how-it-works .content p {
+  font-size: 15px;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 30px;
+}
+.how-it-works .content img {
+  height: 60px;
+}
+
+.video-section {
+  margin: 50px 0px;
+  padding: 0px 50px;
+}
+.video-section h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #0170e3;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.faqs-section {
+  margin: 50px 0px;
+  padding: 0px 50px;
+}
+.faqs-section h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #0170e3;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.editor-section {
+  min-height: 100vh;
+  background-image: url("../imgs/ri-processing.png");
+  background-size: cover;
+  background-position: center;
+}
+.editor-section h2 {
+  text-align: center;
+  margin: 30px 0px;
+  font-family: "Raleway", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #0170e3;
+}
+.editor-section h1 {
+  font-size: 30px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  padding: 10px 20px;
+}
+.editor-section h1 span {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 100;
+}
+
+.dropzone-custom {
+  padding: 100px 50px;
+  min-width: 500px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid rgba(42, 41, 41, 0.5411764706);
+  background-color: white;
+}
+.dropzone-custom:hover {
+  background-color: rgba(177, 177, 177, 0.1019607843);
+}
+.dropzone-custom span {
+  font-size: 50px;
+}
+
+.editor-plate {
+  background-color: rgba(6, 18, 11, 0.4588235294);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 20px 30px;
+  border-radius: 5px;
+  position: absolute;
+  top: 50px;
+  left: 100%;
+  transition: all 1s ease-out;
+}
+.editor-plate button {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  font-family: "Open Sans", sans-serif;
+  border-radius: 10px;
+}
+.editor-plate button:hover img {
+  transform: translateY(-5px);
+}
+.editor-plate .custom-row {
+  gap: 15px;
+  display: flex;
+  margin: 20px 0px;
+}
+.editor-plate .custom-row img {
+  width: 40px;
+  margin: auto;
+  transition: all 0.5s ease-out;
+}/*# sourceMappingURL=style.css.map */
