@@ -54,7 +54,6 @@ body {
 .floating-home {
   position: fixed;
   bottom: 50px;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   left: 100%;
@@ -68,7 +67,6 @@ body {
 }
 
 .hero-section-content {
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   margin: auto 0px;
@@ -95,6 +93,8 @@ body {
   display: flex;
   gap: 10px;
   padding: 15px 30px;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
 }
 .hero-section-content button:nth-child(1) {
   background-color: white;
@@ -173,7 +173,6 @@ body {
 
 .editor-section {
   min-height: 100vh;
-  background-image: url("../imgs/ri-processing.png");
   background-size: cover;
   background-position: center;
 }
@@ -199,7 +198,6 @@ body {
 .dropzone-custom {
   padding: 100px 50px;
   min-width: 500px;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   margin: auto;
@@ -215,17 +213,24 @@ body {
   font-size: 50px;
 }
 
+.preview-img {
+  max-width: 500px;
+  max-height: 500px;
+  margin: 40px auto;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
 .editor-plate {
   background-color: rgba(6, 18, 11, 0.4588235294);
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   padding: 20px 30px;
   border-radius: 5px;
   position: absolute;
+  transition: all 1s ease-out;
   top: 50px;
   left: 100%;
-  transition: all 1s ease-out;
 }
 .editor-plate button {
   background-color: white;
@@ -246,4 +251,48 @@ body {
   width: 40px;
   margin: auto;
   transition: all 0.5s ease-out;
+}
+
+.resize-plate {
+  background-color: rgba(6, 18, 11, 0.4588235294);
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 20px 30px;
+  border-radius: 5px;
+  position: absolute;
+  transition: all 1s ease-out;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  position: absolute;
+  top: 10.4rem;
+  right: 5rem;
+  transform: translateY(-35rem);
+}
+.resize-plate input {
+  border-radius: 5px;
+  min-width: 250px;
+}
+.resize-plate button {
+  background-color: #0170e3;
+  font-size: 18px;
+  color: white;
+  font-weight: 700;
+  border-radius: 30px;
+  display: flex;
+  gap: 10px;
+  padding: 15px 30px;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  border: 2px solid white;
+}
+.resize-plate button:hover {
+  background-color: white;
+  border: 2px solid #0170e3;
+  color: #0170e3;
+}
+
+.message-imgs img {
+  transition: all 0.5s ease-in;
+  position: absolute;
 }/*# sourceMappingURL=style.css.map */

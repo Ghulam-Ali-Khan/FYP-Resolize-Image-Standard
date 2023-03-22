@@ -12,18 +12,9 @@ import Footer from "./components/Footer";
 
 const App = () =>{
 
-  // const [data , setData] = useState([{}]);
+  
 
-  // useEffect(()=>{
-  //   fetch("/persons").then(
-  //     res=> res.json()
-  //   ).then(
-  //     data => {
-  //       setData(data);
-  //       console.log(data);
-  //     }
-  //   )
-  // },[])
+
 
   return(
 <>

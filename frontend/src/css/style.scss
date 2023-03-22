@@ -44,6 +44,25 @@ $theme_blue : #0170e3;
     padding:0px 50px;
 }
 
+@mixin plates-common{
+    
+    background-color: #06120b75;
+    width: fit-content;
+    padding: 20px 30px;
+    border-radius: 5px;
+    position: absolute;
+    transition: all 1s ease-out;
+
+}
+@mixin btn-style-1{
+    
+        border-radius: 30px;
+        display: flex;
+        gap: 10px;
+        padding:15px 30px;
+        max-width: fit-content;
+   
+}
 // Navbar
 .nav-links{
 position: fixed;
@@ -133,10 +152,7 @@ p{
 }
 button{
     @include btns-font();
-    border-radius: 30px;
-    display: flex;
-    gap: 10px;
-    padding:15px 30px;
+    @include btn-style-1();
 }
 button:nth-child(1)
 {
@@ -229,7 +245,7 @@ h2{
 // Editor Page start
 .editor-section{
     min-height: 100vh;
-       background-image: url('../imgs/ri-processing.png');
+    //    background-image: url('../imgs/ri-processing.png');
    background-size: cover;
    background-position: center;
     h2{
@@ -274,20 +290,22 @@ h2{
 }
 
 // Dropzone End
-
+.preview-img{
+    max-width: 500px;
+    max-height: 500px;
+    margin: 40px auto;
+    border:1px solid black;
+    border-radius: 5px;
+}
 
 
 // Editor Plate
 
 .editor-plate{
-    background-color: #06120b75;
-    width: fit-content;
-    padding: 20px 30px;
-    border-radius: 5px;
-    position: absolute;
+    @include plates-common();
     top: 50px;
     left: 100%;
-    transition: all 1s ease-out;
+    
 
 
     button{
@@ -316,7 +334,50 @@ h2{
             width: 40px;
             margin: auto;
             transition: all 0.5s ease-out;
+
           }
 
         }
 }
+.resize-plate{
+    
+
+    @include plates-common();
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    position: absolute;
+    top: 10.4rem;
+    right: 5rem;
+    transform: translateY(-35rem);
+    input{
+        border-radius: 5px;
+        min-width: 250px;
+        
+    }
+    button{
+        background-color: $theme_blue;
+        @include btns-font();
+        @include btn-style-1();
+        border: 2px solid white;
+
+        &:hover{
+            background-color: white;
+            border: 2px solid $theme_blue;
+            color: $theme_blue;
+        }
+
+    }
+   
+}
+
+// Message Images
+.message-imgs{
+
+    img{
+        transition: all 0.5s ease-in;
+        position: absolute;
+    }
+
+}
+// Message Images End
