@@ -15,6 +15,10 @@ const DragDrop = ({ open }) => {
   const resizeState = useSelector((state) => state.plateState);
   const submitResize = useSelector((state) => state.submitResize);
   const resizeAspects = useSelector((state) => state.resizeAspects);
+  const flipState = useSelector((state) => state.flipState); 
+  const submitFlip = useSelector((state) => state.submitFlip); 
+  const flipRotation = useSelector((state) => state.flipRotation); 
+  
   const dispatch = useDispatch();
 
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({});
@@ -112,11 +116,39 @@ const DragDrop = ({ open }) => {
     
 }, [submitResize]);
 
- 
 
 useEffect(()=>{
-  console.log("submitResize : "+submitResize);
-},[submitResize])
+  if (submitFlip) {
+
+    // e.preventDefault();
+    console.log("Ghulam Function Clicked...............");
+    const formData = new FormData();
+    formData.append('image', imgBits);
+    formData.append('flipRight', flipRotation.right);
+    formData.append('flipLeft', flipRotation.left);
+    formData.append('flipTop', flipRotation.top);
+    formData.append('flipDown', flipRotation.bottom);
+
+    formData.append('image_name', "Flip Image");
+    fetch('http://127.0.0.1:8000/api/flip/', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+
+
+
+    console.log("Form Data : " + formData.get('image'));
+
+  }
+     
+  
+}, [submitFlip]);
+ 
+
+
 
   return (
     <>

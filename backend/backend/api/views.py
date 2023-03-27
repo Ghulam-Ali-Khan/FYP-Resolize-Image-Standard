@@ -4,10 +4,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ImageSerializer
 from .serializers import ResizeImageSerializer
+from .serializers import FlipImageSerializer
 
 from .models import Image
 from .models import ResizeImage
-
+from .models import FlipImage
 
 import base64
 from io import BytesIO
@@ -72,10 +73,29 @@ def resizeImg(imgPath, width, height):
     return base64_string
 
 
-def flipImg(imgPath, flip):
+def flipImg(imgPath, down, up, right, left):
 
     imgRead = cv2.imread(imgPath, 1) 
-    fliped_img = cv2.flip(imgRead, flip)
+    imgRead = cv2.cvtColor(imgRead, cv2.COLOR_BGR2RGB) # convert to RGB
+
+
+    if(down==1):
+         fliped_img = cv2.flip(imgRead, 0)
+         
+    elif(up==1):
+        fliped_img = cv2.flip(imgRead, 0)
+
+    elif(left==1):
+        fliped_img = cv2.flip(imgRead, 1)
+    elif(right==1):
+        fliped_img = cv2.flip(imgRead, -1)
+
+
+   
+
+
+
+
     pillow_img = PillowImage.fromarray(fliped_img)
     buffer = BytesIO()
     pillow_img.save(buffer, format='PNG')
@@ -103,10 +123,39 @@ def showResized(req):
     os.remove('my_image.png')
     return render(req, 'file.html', context)
 
+def showFliped(req):
+    latest_object = FlipImage.objects.latest('created')
+    imagy = save_base64_image('my_image', latest_object.image)
+    left = latest_object.flipLeft
+    right = latest_object.flipRight
+    up = latest_object.flipTop
+    down = latest_object.flipDown
+    
+    base64_string = flipImg('my_image.png', down, up, right, left)
+    context = {'data': base64_string}
+    
+    
+    os.remove('my_image.png')
+    return render(req, 'file.html', context)
+
 @api_view(['POST'])
 def get_resize_data(req):
     if req.method == 'POST':
         serializer = ResizeImageSerializer(data=req.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.errors, status=400)
+    else:
+        return Response("Invalid request method. Only POST requests are allowed.", status=405)
+
+
+
+@api_view(['POST'])
+def get_flip_data(req):
+    if req.method == 'POST':
+        serializer = FlipImageSerializer(data=req.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)

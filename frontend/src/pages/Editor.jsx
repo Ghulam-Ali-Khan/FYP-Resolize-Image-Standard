@@ -7,6 +7,7 @@ import particlesImg from "../imgs/ri-processing.png";
 import resizeMessage from "../imgs/resize-message.png"; 
 import resolizeMessage from "../imgs/resolize-message.png";
 import ResizePlate from "../components/ResizePlate";
+import FlipPlate from "../components/FlipPlate";
 
 const Editor = () => {
 
@@ -25,6 +26,7 @@ const Editor = () => {
         </div>
         <EditorPlate/>
         <ResizePlate/>
+        <FlipPlate/>
          <img src={particlesImg}   style={{maxWidth:"100%", zIndex:"-3", position:"absolute", right:"-150px", bottom:"-10rem"}} id="particlesImg"/>
     
       </div>

@@ -20,7 +20,7 @@ class ResizeImage(models.Model):
   updated = models.DateTimeField(auto_now=True)
 
 
-class ResizeImage(models.Model):
+class FlipImage(models.Model):
   image_name = models.CharField(max_length=255)
   image = models.TextField()
   flipRight = models.IntegerField(default=0)

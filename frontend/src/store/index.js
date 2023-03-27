@@ -1,29 +1,47 @@
-import {configureStore, createSlice} from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 
 
 const reduxStates = createSlice({
-    name:"animation States",
-    initialState:{plateState:false, resizeState:false,submitResize:false, resizeAspects:{width:null, height:null} },
-    reducers:{
-        togglePlateState(state){
+    name: "animation States",
+    initialState: {
+        plateState: false,
+        resizeState: false, submitResize: false, resizeAspects: { width: null, height: null },
+        flipState:false, submitFlip: false, flipRotation: { top: null, bottom: null, right:null, left:null },
+
+    },
+    reducers: {
+        togglePlateState(state) {
             state.plateState = !state.plateState;
-               
-      },
-        toggleResizeState(state){
-              state.plateState = !state.plateState;
-              state.resizeState = !state.resizeState;
-              
-                 
+
         },
-        submitResizeState(state, action){
+        toggleResizeState(state) {
+            state.plateState = !state.plateState;
+            state.resizeState = !state.resizeState;
+
+
+        },
+        submitResizeState(state, action) {
             const { width, height, submitState } = action.payload;
             state.submitResize = submitState;
             state.resizeAspects.width = width;
             state.resizeAspects.height = height;
-               
-      }
-        
+
+        },
+        toggleFlipState(state) {
+            state.plateState = !state.plateState;
+            state.flipState = !state.flipState;
+        },
+        submitFlipState(state, action){
+            const {top, bottom, left, right, submitFlip} = action.payload;
+
+            state.submitFlip = submitFlip;
+            state.flipRotation.bottom= bottom;
+            state.flipRotation.left =left;
+            state.flipRotation.right = right;
+            state.flipRotation.top = top;
+        }
+
     }
 });
 

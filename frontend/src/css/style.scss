@@ -381,3 +381,50 @@ h2{
 
 }
 // Message Images End
+
+
+// Flip Box
+
+
+.flipbox{
+    @include plates-common();
+  
+
+
+    position: absolute;
+    top: -15rem;
+    // top:10rem;
+    right: 0;
+
+    h3{
+        font-size: 3rem;
+        color: white;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+
+ .buttons-area{
+    display: flex;
+    gap: 10px;
+
+    button{
+        background-color: white;
+        padding: 10px 0px;
+        min-width: 80px;
+        display: flex;
+        flex-direction: column;
+        font-size: 20px;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+
+
+        &:hover{
+            background-color: $theme_blue;
+            color: white;
+        }
+
+    }
+}
+}

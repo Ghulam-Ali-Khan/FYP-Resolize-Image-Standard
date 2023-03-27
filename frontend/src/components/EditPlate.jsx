@@ -16,15 +16,15 @@ const EditPlate = () => {
   const resizeState = useSelector((state)=> state.resizeState);
   const plateState = useSelector((state)=> state.plateState);
   const submitResize = useSelector((state)=>state.submitResize);
+  const flipState = useSelector((state) => state.flipState); 
 
-
-  console.log("Plate State : "+ plateState+ "  Resize State : "+ resizeState+ " submitResize : "+ submitResize);
+  console.log("Plate State : "+ plateState+ "  Resize State : "+ resizeState+ " submitResize : "+ submitResize + "Flip State : "+flipState);
 
 
   const dispatch = useDispatch();
   const [resize, setResize] = useState(false);
   const [resolize, setResolize] = useState(false);
-  
+
   
   
   // function messageImgae(id, value){
@@ -119,7 +119,15 @@ const EditPlate = () => {
           </div>
 
           <div className="custom-row">
-            <button>
+            <button
+            
+            onClick={(e)=>{
+              dispatch(actions.toggleFlipState());
+             
+              console.log(flipState);
+            }}
+
+            >
               <img src={flipImg} alt="flip" />
               Flip
             </button>
