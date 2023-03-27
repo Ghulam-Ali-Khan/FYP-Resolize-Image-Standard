@@ -15,9 +15,10 @@ import { actions } from "../store";
 const EditPlate = () => {
   const resizeState = useSelector((state)=> state.resizeState);
   const plateState = useSelector((state)=> state.plateState);
+  const submitResize = useSelector((state)=>state.submitResize);
 
 
-  console.log("Plate State : "+ plateState+ "  Resize State : "+ resizeState);
+  console.log("Plate State : "+ plateState+ "  Resize State : "+ resizeState+ " submitResize : "+ submitResize);
 
 
   const dispatch = useDispatch();

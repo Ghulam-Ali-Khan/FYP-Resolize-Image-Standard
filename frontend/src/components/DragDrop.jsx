@@ -11,13 +11,19 @@ const fileTypes = ["JPG", "PNG"];
 const DragDrop = ({ open }) => {
   const [plate, setPlate] = useState(null);
   const [particlesImg, setParticlesImg] = useState(null);
-  const [dropzoneId, setDropzoneId] = useState(null);  
-const resizeState = useSelector((state)=>state.plateState);
-const dispatch = useDispatch();
+  const [dropzoneId, setDropzoneId] = useState(null);
+  const resizeState = useSelector((state) => state.plateState);
+  const submitResize = useSelector((state) => state.submitResize);
+  const resizeAspects = useSelector((state) => state.resizeAspects);
+  const dispatch = useDispatch();
 
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({});
   const [img, setImg] = useState();
-  const [imgInfo, setImgInfo] = useState([]);
+  const [imgBits, setImgBits] = useState('');
+
+
+
+
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>
       {file.path} - {file.size} bytes
@@ -29,36 +35,45 @@ const dispatch = useDispatch();
     setParticlesImg(document.getElementById("particlesImg"));
     setDropzoneId(document.getElementById("dropzoneId"));
   }, []);
- 
+
 
   useEffect(() => {
+    if (acceptedFiles.length > 0) {
 
-   
-
-    if (files.length > 0) {
-    
-      console.log("696969");
-      setImg(URL.createObjectURL(acceptedFiles[0]));
       if (particlesImg) particlesImg.style.display = "none";
       if (dropzoneId) dropzoneId.style.display = "none";
       if (plate) plate.style.transform = "translateX(-400px)";
       dispatch(actions.togglePlateState());
-      
     }
-
-    
   }, [acceptedFiles]);
+
+  useEffect(() => {
+    if (acceptedFiles.length > 0) {
+      const reader = new FileReader();
+      reader.readAsDataURL(acceptedFiles[0]);
+      reader.onload = () => {
+
+        setImgBits(reader.result);
+        setImg(reader.result);
+
+      };
+
+      console.log("Ghulam Ali 1 : " + imgBits);
+
+
+    }
+  }, [files]);
 
 
   useEffect(() => {
-    
+
     console.log("GA Test1");
 
     if (plate) {
       console.log("GA Test2")
       if (resizeState) {
         console.log("GA Test3")
-        
+
         console.log("resizeState Transt");
         plate.style.transform = "translateX(-400px)";
       } else if (!resizeState) {
@@ -69,8 +84,43 @@ const dispatch = useDispatch();
     }
   }, [resizeState, plate]);
 
+
+  useEffect(()=>{
+    if (submitResize) {
+
+      // e.preventDefault();
+
+      const formData = new FormData();
+      formData.append('image', imgBits);
+      formData.append('width', resizeAspects.width);
+      formData.append('height', resizeAspects.height);
+      formData.append('image_name', "Resize Image");
+      fetch('http://127.0.0.1:8000/api/resize/', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+  
+  
+  
+      console.log("Form Data : " + formData.get('image'));
+
+    }
+       
+    
+}, [submitResize]);
+
+ 
+
+useEffect(()=>{
+  console.log("submitResize : "+submitResize);
+},[submitResize])
+
   return (
     <>
+
       <div
         {...getRootProps({ className: "dropzone" })}
         className="dropzone-custom drop-shadow-lg"
@@ -90,6 +140,10 @@ const dispatch = useDispatch();
       </div>
 
       <img src={img} alt="" className="preview-img" />
+
+
+      
+
     </>
   );
 };
