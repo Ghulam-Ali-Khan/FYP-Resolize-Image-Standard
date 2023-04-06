@@ -16,7 +16,8 @@ const EditPlate = () => {
   const resizeState = useSelector((state)=> state.resizeState);
   const plateState = useSelector((state)=> state.plateState);
   const submitResize = useSelector((state)=>state.submitResize);
-  const flipState = useSelector((state) => state.flipState); 
+  const flipState = useSelector((state) => state.flipState);
+  const filterState = useSelector((state)=> state.filterState); 
 
   console.log("Plate State : "+ plateState+ "  Resize State : "+ resizeState+ " submitResize : "+ submitResize + "Flip State : "+flipState);
 
@@ -112,7 +113,13 @@ const EditPlate = () => {
               <img src={layerImg} alt="layer" />
               Overlayer
             </button>
-            <button>
+            <button
+            onClick={(e)=>{
+              dispatch(actions.toggleFilterState());
+             
+              console.log(filterState, plateState);
+            }}
+            >
               <img src={filterImg} alt="filter" />
               Filters
             </button>

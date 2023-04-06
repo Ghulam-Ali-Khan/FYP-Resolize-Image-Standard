@@ -1,15 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
+
+* {
     text-decoration: none;
 
 }
 
-body{
+body {
     overflow-x: hidden;
 }
 
-$open_sans : 'Open Sans', sans-serif;
-$railway : 'Raleway', sans-serif;
+$open_sans : 'Open Sans',
+sans-serif;
+$railway : 'Raleway',
+sans-serif;
 $theme_green : #019468;
 $theme_pink: #ff2e5f;
 $theme_yellow: #f7b101;
@@ -21,6 +24,7 @@ $theme_blue : #0170e3;
     font-weight: 900;
 
 }
+
 @mixin para-content {
     font-size: 15px;
     font-weight: 400;
@@ -32,7 +36,8 @@ $theme_blue : #0170e3;
     color: white;
     font-weight: 700;
 }
-@mixin sub-heading{
+
+@mixin sub-heading {
     font-family: $railway;
     font-size: 40px;
     font-weight: 700;
@@ -41,11 +46,11 @@ $theme_blue : #0170e3;
 
 @mixin section-mp {
     margin: 50px 0px;
-    padding:0px 50px;
+    padding: 0px 50px;
 }
 
-@mixin plates-common{
-    
+@mixin plates-common {
+
     background-color: #06120b75;
     width: fit-content;
     padding: 20px 30px;
@@ -54,361 +59,23 @@ $theme_blue : #0170e3;
     transition: all 1s ease-out;
 
 }
-@mixin btn-style-1{
-    
-        border-radius: 30px;
-        display: flex;
-        gap: 10px;
-        padding:15px 30px;
-        max-width: fit-content;
-   
-}
-// Navbar
-.nav-links{
-position: fixed;
-top:300px;
-left: 100%;
-transform: translateX(-50px);
-z-index: 10;
 
-a{
+@mixin btn-style-1 {
+
+    border-radius: 30px;
     display: flex;
-    width:300px;
-    padding: 13px 15px;
-    border-radius: 20px 0px 0px 20px;
-    font-family: $open_sans;
-    font-weight:600;
-    font-size: 20px;
-    text-decoration: none;
-
-span{
-        margin-right: 10px;
-        font-size: 30px;
-}
-&:hover{
-    text-decoration: none;
-    color: black;
-}
-}
-
-.editor,
-.object-remover
-{
-    margin: 15px 0px;
-    border-radius: 20px 0px 0px 20px;
-    transition: all 0.5s ease-in;
-}
-
-.object-remover
-{
-    background-color: $theme_yellow;
-}
-.editor
-{
-    background-color: $theme_pink;
-}
-
-.editor:hover{
-    transform: translateX(-150px);
-
-}
-.object-remover:hover{
-    transform: translateX(-180px);
-}
-
-}
-.floating-home{
-    position: fixed;
-    bottom: 50px;
-    width:fit-content;
-    left: 100%;
-    transform: translateX(-50px);
-    // transform: translateY(-50px);
-    
-a{
-    padding: 10px;
-    text-align: center;
-    border-radius: 50%;
-    background-color: $theme_green;
-}
-
-}
-// Navbar End
-.hero-section-content{
-    height: fit-content;
-    margin: auto 0px;
-
-h1{
-   @include brand-heading();
-   font-family: $railway;
-
-span{
-    font-family: $open_sans;
-    font-weight: 300;
-}   
-}
-p{
-    @include para-content();
-}
-button{
-    @include btns-font();
-    @include btn-style-1();
-}
-button:nth-child(1)
-{
-  background-color: white;
-  border: 2px solid $theme_green;
-  color: $theme_green;
-}
-button:nth-child(2)
-{
-  background-color: white; 
-  border: 2px solid $theme_pink;
-  color: $theme_pink;
-}
-
-button:nth-child(1):hover
-{
-  background-color: $theme_green;
-  color: white;
-}
-button:nth-child(2):hover
-{
-  background-color: $theme_pink; 
-  color: white;
-}
+    gap: 10px;
+    padding: 15px 30px;
+    max-width: fit-content;
 
 }
 
+@mixin common-btn-for-plates {
 
-
-
-.hero-section{
-//    background-image: url('../imgs/ri-processing.png');
-   background-size: cover;
-   background-position: center;
-// background-color: blue;
-}
-
-
-// How it works section
-.how-it-works
-{
-    @include section-mp;
-
-
-.content{
-    max-width: 500px;
-    padding: 30px 40px;
-    margin-left: 50px;
-
-h2{
-   @include sub-heading;   
-}    
-p{
-    @include para-content;
-    margin-bottom: 30px;
-}
-img{
-    height: 60px;
-}
-
-}
-
-}
-// how it works section end
-
-// video section
-.video-section{
-    @include section-mp;
-
-h2{
-    @include sub-heading;
-    text-align: center;
-    margin-bottom: 30px;
-}    
-}
-// end video section
-
-// Faqs start
-.faqs-section{
-    @include section-mp();
-h2{
-    @include sub-heading();
-    margin-bottom: 30px;
-    text-align: center;
-}
-}
-// Faqs End
-
-
-// Editor Page start
-.editor-section{
-    min-height: 100vh;
-    //    background-image: url('../imgs/ri-processing.png');
-   background-size: cover;
-   background-position: center;
-    h2{
-       text-align: center;
-       margin: 30px 0px;
-        @include sub-heading();
-    }
-    h1{
-        font-size: 30px;
-        font-family: $railway;
-        font-weight: 700;
-        padding:10px 20px;
-        span{
-            font-family: $open_sans;
-            font-weight: 100;
-        }
-    }
-}
-// Editor Page end 
-
-
-// Dropzone Start
-.dropzone-custom
-{
-    padding:100px 50px;
-    min-width: 500px;
-     width:fit-content; 
-     margin:auto; 
-     cursor:pointer; 
-    border-radius:10px;
-     border:1px solid #2a29298a;
-     background-color: white;
-
-     &:hover{
-        background-color: #b1b1b11a;
-     }
-
-     span{
-        font-size: 50px;
-     }
-
-}
-
-// Dropzone End
-.preview-img{
-    max-width: 500px;
-    max-height: 500px;
-    margin: 40px auto;
-    border:1px solid black;
-    border-radius: 5px;
-}
-
-
-// Editor Plate
-
-.editor-plate{
-    @include plates-common();
-    top: 50px;
-    left: 100%;
-    
-
-
-    button{
-        background-color: white;
-        // padding: 20px 15px;
-        width: 100px;
-        height: 100px;
-        font-family: $open_sans;
-        border-radius: 10px;
-       
-
-        &:hover img{
-            transform: translateY(-5px);
-                   
-        }
-        
-    }
-    .custom-row{
-          gap: 15px;
-          display: flex;
-          margin: 20px 0px;
- 
-
-
-          img{
-            width: 40px;
-            margin: auto;
-            transition: all 0.5s ease-out;
-
-          }
-
-        }
-}
-.resize-plate{
-    
-
-    @include plates-common();
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-    position: absolute;
-    top: 10.4rem;
-    right: 5rem;
-    transform: translateY(-35rem);
-    input{
-        border-radius: 5px;
-        min-width: 250px;
-        
-    }
-    button{
-        background-color: $theme_blue;
-        @include btns-font();
-        @include btn-style-1();
-        border: 2px solid white;
-
-        &:hover{
-            background-color: white;
-            border: 2px solid $theme_blue;
-            color: $theme_blue;
-        }
-
-    }
-   
-}
-
-// Message Images
-.message-imgs{
-
-    img{
-        transition: all 0.5s ease-in;
-        position: absolute;
-    }
-
-}
-// Message Images End
-
-
-// Flip Box
-
-
-.flipbox{
-    @include plates-common();
-  
-
-
-    position: absolute;
-    top: -15rem;
-    // top:10rem;
-    right: 0;
-
-    h3{
-        font-size: 3rem;
-        color: white;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-
- .buttons-area{
     display: flex;
     gap: 10px;
 
-    button{
+    button {
         background-color: white;
         padding: 10px 0px;
         min-width: 80px;
@@ -420,11 +87,436 @@ h2{
         justify-content: center;
 
 
-        &:hover{
+        &:hover {
             background-color: $theme_blue;
             color: white;
         }
 
     }
 }
+
+// Navbar
+.nav-links {
+    position: fixed;
+    top: 300px;
+    left: 100%;
+    transform: translateX(-50px);
+    z-index: 10;
+
+    a {
+        display: flex;
+        width: 300px;
+        padding: 13px 15px;
+        border-radius: 20px 0px 0px 20px;
+        font-family: $open_sans;
+        font-weight: 600;
+        font-size: 20px;
+        text-decoration: none;
+
+        span {
+            margin-right: 10px;
+            font-size: 30px;
+        }
+
+        &:hover {
+            text-decoration: none;
+            color: black;
+        }
+    }
+
+    .editor,
+    .object-remover {
+        margin: 15px 0px;
+        border-radius: 20px 0px 0px 20px;
+        transition: all 0.5s ease-in;
+    }
+
+    .object-remover {
+        background-color: $theme_yellow;
+    }
+
+    .editor {
+        background-color: $theme_pink;
+    }
+
+    .editor:hover {
+        transform: translateX(-150px);
+
+    }
+
+    .object-remover:hover {
+        transform: translateX(-180px);
+    }
+
+}
+
+.floating-home {
+    position: fixed;
+    bottom: 50px;
+    width: fit-content;
+    left: 100%;
+    transform: translateX(-50px);
+    // transform: translateY(-50px);
+
+    a {
+        padding: 10px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: $theme_green;
+    }
+
+}
+
+// Navbar End
+.hero-section-content {
+    height: fit-content;
+    margin: auto 0px;
+
+    h1 {
+        @include brand-heading();
+        font-family: $railway;
+
+        span {
+            font-family: $open_sans;
+            font-weight: 300;
+        }
+    }
+
+    p {
+        @include para-content();
+    }
+
+    button {
+        @include btns-font();
+        @include btn-style-1();
+    }
+
+    button:nth-child(1) {
+        background-color: white;
+        border: 2px solid $theme_green;
+        color: $theme_green;
+    }
+
+    button:nth-child(2) {
+        background-color: white;
+        border: 2px solid $theme_pink;
+        color: $theme_pink;
+    }
+
+    button:nth-child(1):hover {
+        background-color: $theme_green;
+        color: white;
+    }
+
+    button:nth-child(2):hover {
+        background-color: $theme_pink;
+        color: white;
+    }
+
+}
+
+
+
+
+.hero-section {
+    //    background-image: url('../imgs/ri-processing.png');
+    background-size: cover;
+    background-position: center;
+    // background-color: blue;
+}
+
+
+// How it works section
+.how-it-works {
+    @include section-mp;
+
+
+    .content {
+        max-width: 500px;
+        padding: 30px 40px;
+        margin-left: 50px;
+
+        h2 {
+            @include sub-heading;
+        }
+
+        p {
+            @include para-content;
+            margin-bottom: 30px;
+        }
+
+        img {
+            height: 60px;
+        }
+
+    }
+
+}
+
+// how it works section end
+
+// video section
+.video-section {
+    @include section-mp;
+
+    h2 {
+        @include sub-heading;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+}
+
+// end video section
+
+// Faqs start
+.faqs-section {
+    @include section-mp();
+
+    h2 {
+        @include sub-heading();
+        margin-bottom: 30px;
+        text-align: center;
+    }
+}
+
+// Faqs End
+
+
+// Editor Page start
+.editor-section {
+    min-height: 100vh;
+    //    background-image: url('../imgs/ri-processing.png');
+    background-size: cover;
+    background-position: center;
+
+    h2 {
+        text-align: center;
+        margin: 30px 0px;
+        @include sub-heading();
+    }
+
+    h1 {
+        font-size: 30px;
+        font-family: $railway;
+        font-weight: 700;
+        padding: 10px 20px;
+
+        span {
+            font-family: $open_sans;
+            font-weight: 100;
+        }
+    }
+}
+
+// Editor Page end 
+
+
+// Dropzone Start
+.dropzone-custom {
+    padding: 100px 50px;
+    min-width: 500px;
+    width: fit-content;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #2a29298a;
+    background-color: white;
+
+    &:hover {
+        background-color: #b1b1b11a;
+    }
+
+    span {
+        font-size: 50px;
+    }
+
+}
+
+// Dropzone End
+.preview-img {
+    max-width: 500px;
+    max-height: 500px;
+    margin: 40px auto;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+
+// Editor Plate
+
+.editor-plate {
+    @include plates-common();
+    top: 50px;
+    left: 100%;
+
+
+
+    button {
+        background-color: white;
+        // padding: 20px 15px;
+        width: 100px;
+        height: 100px;
+        font-family: $open_sans;
+        border-radius: 10px;
+
+
+        &:hover img {
+            transform: translateY(-5px);
+
+        }
+
+    }
+
+    .custom-row {
+        gap: 15px;
+        display: flex;
+        margin: 20px 0px;
+
+
+
+        img {
+            width: 40px;
+            margin: auto;
+            transition: all 0.5s ease-out;
+
+        }
+
+    }
+}
+
+.resize-plate {
+
+
+    @include plates-common();
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    position: absolute;
+    top: 10.4rem;
+    right: 5rem;
+    transform: translateY(-35rem);
+
+    input {
+        border-radius: 5px;
+        min-width: 250px;
+
+    }
+
+    button {
+        background-color: $theme_blue;
+        @include btns-font();
+        @include btn-style-1();
+        border: 2px solid white;
+
+        &:hover {
+            background-color: white;
+            border: 2px solid $theme_blue;
+            color: $theme_blue;
+        }
+
+    }
+
+}
+
+// Message Images
+.message-imgs {
+
+    img {
+        transition: all 0.5s ease-in;
+        position: absolute;
+    }
+
+}
+
+// Message Images End
+
+
+// Flip Box
+
+
+.flipbox {
+    @include plates-common();
+
+
+
+    position: absolute;
+    top: -15rem;
+    // top:10rem;
+    right: 0;
+
+    h3 {
+        font-size: 3rem;
+        color: white;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+
+    .buttons-area {
+
+        display: flex;
+        gap: 10px;
+
+        button {
+            background-color: white;
+            padding: 10px 0px;
+            min-width: 80px;
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+
+
+            &:hover {
+                background-color: $theme_blue;
+                color: white;
+            }
+
+        }
+    }
+}
+
+
+// filter plate css
+
+.filter-plate {
+    @include plates-common();
+
+
+    position: absolute;
+    top:-20rem;
+    right: 20px;
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1{
+    color: white;
+  }
+
+    select {
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+    button {
+
+        margin-top: 20px;
+        background-color: $theme_blue;
+        @include btns-font();
+        @include btn-style-1();
+        border: 2px solid white;
+
+        &:hover {
+            background-color: white;
+            border: 2px solid $theme_blue;
+            color: $theme_blue;
+        }
+
+    }
+
 }

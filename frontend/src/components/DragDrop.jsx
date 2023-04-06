@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../store";
+import ImageCropDialog from "./ImageCropDialog";
 
 
-
+const initCropData = [
+  {
+    id: 1,
+    imageUrl: null,
+    croppedImageUrl: null,
+  },
+  
+];
 
 const fileTypes = ["JPG", "PNG"];
 
@@ -18,7 +26,11 @@ const DragDrop = ({ open }) => {
   const flipState = useSelector((state) => state.flipState); 
   const submitFlip = useSelector((state) => state.submitFlip); 
   const flipRotation = useSelector((state) => state.flipRotation); 
-  
+  const submitFilter = useSelector((state) => state.submitFilter); 
+  const filter = useSelector((state) => state.filter);
+  const filterState = useSelector((state) => state.filterState);
+
+
   const dispatch = useDispatch();
 
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({});
@@ -26,7 +38,28 @@ const DragDrop = ({ open }) => {
   const [imgBits, setImgBits] = useState('');
 
 
+// Crop Section Start
+const [cropImg, setCropImg] = useState(initCropData);
+const [selectedCropImg, setSelectedCropImg] = useState(null);
 
+const onCancelCrop = () => {
+  setSelectedCropImg(null);
+};
+
+const setCroppedImageFor = (id, crop, zoom, aspect, croppedImageUrl) => {
+  const newCropImgList = [...cropImg];
+  const cropImgIndex = cropImg.findIndex((x) => x.id === id);
+  const cropyImage = cropImg[cropImgIndex];
+  const newCropImg = { ...cropyImage, croppedImageUrl, crop, zoom, aspect };
+  newCropImgList[cropImgIndex] = newCropImg;
+  setCropImg(newCropImgList);
+  setSelectedCropImg(null);
+};
+
+const resetCropImage = (id) => {
+  setCroppedImageFor(id);
+};
+// Crop Section End
 
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>
@@ -148,10 +181,37 @@ useEffect(()=>{
 }, [submitFlip]);
  
 
+useEffect(()=>{
+  if (submitFilter) {
 
+    // e.preventDefault();
+    console.log("Ghulam Function filter form Clicked...............");
+    const formData = new FormData();
+    formData.append('image', imgBits);
+    formData.append('filter_type', filter);
+    
+
+    formData.append('image_name', "Filter Image");
+    fetch('http://127.0.0.1:8000/api/filter/', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+
+
+
+    console.log("Form Data : " + formData.get('image'));
+
+  }
+     
+  
+}, [submitFilter]);
 
   return (
     <>
+
 
       <div
         {...getRootProps({ className: "dropzone" })}
@@ -174,7 +234,6 @@ useEffect(()=>{
       <img src={img} alt="" className="preview-img" />
 
 
-      
 
     </>
   );

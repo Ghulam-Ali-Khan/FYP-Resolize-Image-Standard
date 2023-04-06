@@ -8,6 +8,7 @@ const reduxStates = createSlice({
         plateState: false,
         resizeState: false, submitResize: false, resizeAspects: { width: null, height: null },
         flipState:false, submitFlip: false, flipRotation: { top: null, bottom: null, right:null, left:null },
+        filterState:false, submitFilter: false, filter: null,
 
     },
     reducers: {
@@ -40,7 +41,19 @@ const reduxStates = createSlice({
             state.flipRotation.left =left;
             state.flipRotation.right = right;
             state.flipRotation.top = top;
-        }
+        },
+        toggleFilterState(state) {
+            state.plateState = !state.plateState;
+            state.filterState = !state.filterState;
+        },
+        submitFilterState(state, action){
+            const {filter, submitFilter} = action.payload;
+
+            state.submitFilter = submitFilter;
+            state.filter= filter;
+           
+        },
+         
 
     }
 });
