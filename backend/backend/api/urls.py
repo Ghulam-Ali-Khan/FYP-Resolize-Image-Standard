@@ -4,7 +4,9 @@ urlpatterns = [
     path('resize/', get_resize_data),
     path('flip/', get_flip_data),
     path('filter/', get_filter_data),
+    path('resolize/', get_resolized_data),
     path('show-resized/', showResized),
     path('show-fliped/', showFliped),
     path('show-filter/', showFiltered),
+    path('show-resolize/', showResolized),
 ]

@@ -22,9 +22,12 @@ from PIL import Image as PillowImage
 
 import cv2
 import numpy
+import numpy as np
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 import os
+import tensorflow as tf
+
 
 
 
@@ -162,45 +165,32 @@ def filterImg(imgPath, filter):
 
 
 
-
 def resolizeImg(imgPath):
-
     imgRead = cv2.imread(imgPath, 1) 
     imgRead = cv2.cvtColor(imgRead, cv2.COLOR_BGR2RGB) # convert to RGB
 
-    gray = cv2.cvtColor(imgPath, cv2.COLOR_BGR2GRAY)
-
-    # Enhance contrast and brightness
-    adjusted = cv2.convertScaleAbs(gray, alpha=1.5, beta=10)
-
-    # Reduce pixel roughness using a bilateral filter
-    denoised = cv2.bilateralFilter(adjusted, 9, 75, 75)
-
-    # Convert back to RGB
-    enhanced = cv2.cvtColor(denoised, cv2.COLOR_GRAY2RGB)
-
-
+     # Define the scaling factor
+    upscaled_img = cv2.resize(imgRead, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
 
     # Convert image data type to unsigned 8-bit integers
-    enhanced = cv2.convertScaleAbs(enhanced)
+    resolized_img = cv2.convertScaleAbs(upscaled_img)
 
     # Convert image to Pillow format
-    pillow_img = PillowImage.fromarray(enhanced)
+    pillow_img = PillowImage.fromarray(resolized_img)
 
     # Save image as PNG
     buffer = BytesIO()
     pillow_img.save(buffer, format='PNG')
-    file_path = f"resolized_img.png"
+    file_path = f"filtered_img.png"
     default_storage.save(file_path, ContentFile(buffer.getvalue()))
         
-    with open("resolized_img.png", 'rb') as f:
+    with open("filtered_img.png", 'rb') as f:
         image_data = f.read()
         
-    base64_string = image_to_base64("resolized_img.png", image_data)
-    os.remove('resolized_img.png')
+    base64_string = image_to_base64("filtered_img.png", image_data)
+    os.remove('filtered_img.png')
 
     return base64_string
-
 
 
 def showResized(req):
