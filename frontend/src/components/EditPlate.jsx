@@ -18,6 +18,8 @@ const EditPlate = () => {
   const submitResize = useSelector((state)=>state.submitResize);
   const flipState = useSelector((state) => state.flipState);
   const filterState = useSelector((state)=> state.filterState); 
+  const resolizeState = useSelector((state)=>state.resolizeState);
+  const submitResolize = useSelector((state)=>state.submitResolize);
 
   console.log("Plate State : "+ plateState+ "  Resize State : "+ resizeState+ " submitResize : "+ submitResize + "Flip State : "+flipState);
 
@@ -93,6 +95,12 @@ const EditPlate = () => {
               }}
               onMouseLeave={(e) => {
                 setResolize(false);
+              }}
+
+              onClick={(e)=>{
+                dispatch(actions.toggleResolizeState());
+               
+                console.log(resolizeState);
               }}
             >
               <img src={resolizeImg} alt="resolize" />

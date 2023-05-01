@@ -252,7 +252,25 @@ def showResolized(req):
 @api_view(['POST'])
 def get_resize_data(req):
     if req.method == 'POST':
-        serializer = ResizeImageSerializer(data=req.data)
+
+
+
+        
+        imagy = save_base64_image('my_image', req.data['image'])
+        width = req.data['width']
+        height = req.data['height']
+        
+        base64_string = resizeImg('my_image.png', int(width), int(height))
+        # context = {'data': base64_string}
+        data_copy = req.data.copy()
+        data_copy['image'] =  base64_string
+        
+        
+        os.remove('my_image.png')
+
+        print(req.data["width"])
+        
+        serializer = ResizeImageSerializer(data=data_copy)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)

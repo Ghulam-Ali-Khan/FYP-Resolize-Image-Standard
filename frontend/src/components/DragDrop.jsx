@@ -29,6 +29,8 @@ const DragDrop = ({ open }) => {
   const submitFilter = useSelector((state) => state.submitFilter); 
   const filter = useSelector((state) => state.filter);
   const filterState = useSelector((state) => state.filterState);
+  const submitResolize = useSelector((state) => state.submitResolize); 
+  const resolizeState = useSelector((state) => state.resolizeState);
 
 
   const dispatch = useDispatch();
@@ -208,6 +210,35 @@ useEffect(()=>{
      
   
 }, [submitFilter]);
+
+
+
+
+useEffect(()=>{
+  if (submitResolize) {
+
+    // e.preventDefault();
+    console.log("Ghulam Function resolize form Clicked...............");
+    const formData = new FormData();
+    formData.append('image', imgBits);
+
+    formData.append('image_name', "Filter Image");
+    fetch('http://127.0.0.1:8000/api/resolize/', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+
+
+
+    console.log("Form Data : " + formData.get('image'));
+
+  }
+     
+  
+}, [submitResolize]);
 
   return (
     <>
