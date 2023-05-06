@@ -288,7 +288,22 @@ def get_resize_data(req):
 @api_view(['POST'])
 def get_flip_data(req):
     if req.method == 'POST':
-        serializer = FlipImageSerializer(data=req.data)
+
+        imagy = save_base64_image('my_image', req.data['image'])
+        flipRight = req.data['flipRight']
+        flipLeft = req.data['flipLeft']
+        flipTop = req.data['flipTop']
+        flipDown = req.data['flipDown']
+        base64_string = flipImg('my_image.png', int(flipDown), int(flipTop), int(flipRight), int(flipLeft))
+        # context = {'data': base64_string}
+        data_copy = req.data.copy()
+        data_copy['image'] =  base64_string
+        
+        
+        os.remove('my_image.png')
+
+
+        serializer = FlipImageSerializer(data=data_copy)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
@@ -322,9 +337,18 @@ def get_resolized_data(req):
     else:
         return Response("Invalid request method. Only POST requests are allowed.", status=405)
 
+# post apis
+
 def show_resized_data(request):
 
     latest_object = ResizeImage.objects.latest('created')
+    print(latest_object)
+    data = {"id" : latest_object.id, "image_name": latest_object.image_name, "image": latest_object.image }
+    return JsonResponse(data, safe=False)
+
+def show_fliped_data(request):
+
+    latest_object = FlipImage.objects.latest('created')
     print(latest_object)
     data = {"id" : latest_object.id, "image_name": latest_object.image_name, "image": latest_object.image }
     return JsonResponse(data, safe=False)

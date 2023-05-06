@@ -210,6 +210,31 @@ useEffect(()=>{
 }, [submitFlip]);
  
 
+
+useEffect(()=>{
+  if (submitFlip) {
+
+    
+
+    setTimeout(()=>{
+
+      fetch('http://127.0.0.1:8000/api/show-fliped-data/',{
+      method: 'GET',
+    }
+      ).then(response => response.json())
+  .then(data => setImg(data.image))
+  .catch(error => console.error(error));
+
+
+  console.log("Resized Img Ghulam Ali bhai");
+
+    },2000);
+
+  }
+     
+  
+}, [submitFlip]);
+
 useEffect(()=>{
   if (submitFilter) {
 
