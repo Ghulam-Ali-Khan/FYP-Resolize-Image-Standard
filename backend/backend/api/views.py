@@ -14,6 +14,10 @@ from .models import FlipImage
 from .models import FilterImage
 from .models import ResolizeImage
 
+from django.http import JsonResponse
+
+
+
 
 import base64
 from io import BytesIO
@@ -318,4 +322,10 @@ def get_resolized_data(req):
     else:
         return Response("Invalid request method. Only POST requests are allowed.", status=405)
 
+def show_resized_data(request):
+
+    latest_object = ResizeImage.objects.latest('created')
+    print(latest_object)
+    data = {"id" : latest_object.id, "image_name": latest_object.image_name, "image": latest_object.image }
+    return JsonResponse(data, safe=False)
 

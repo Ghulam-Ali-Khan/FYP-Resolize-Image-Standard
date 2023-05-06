@@ -9,4 +9,5 @@ urlpatterns = [
     path('show-fliped/', showFliped),
     path('show-filter/', showFiltered),
     path('show-resolize/', showResolized),
+    path('show-resize-data/', show_resized_data),
 ]

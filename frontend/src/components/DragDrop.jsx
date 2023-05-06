@@ -36,14 +36,14 @@ const DragDrop = ({ open }) => {
   const dispatch = useDispatch();
 
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({});
-  const [img, setImg] = useState();
+  const [img, setImg] = useState(null);
   const [imgBits, setImgBits] = useState('');
 
 
 // Crop Section Start
 const [cropImg, setCropImg] = useState(initCropData);
 const [selectedCropImg, setSelectedCropImg] = useState(null);
-
+const [flag, setFlag]  = useState(true);
 const onCancelCrop = () => {
   setSelectedCropImg(null);
 };
@@ -87,6 +87,9 @@ const resetCropImage = (id) => {
   }, [acceptedFiles]);
 
   useEffect(() => {
+   
+   if(flag){
+  
     if (acceptedFiles.length > 0) {
       const reader = new FileReader();
       reader.readAsDataURL(acceptedFiles[0]);
@@ -97,10 +100,11 @@ const resetCropImage = (id) => {
 
       };
 
-      console.log("Ghulam Ali 1 : " + imgBits);
+      console.log("Files Function : ");
 
-
-    }
+      setFlag(false);
+    }}
+    
   }, [files]);
 
 
@@ -146,11 +150,34 @@ const resetCropImage = (id) => {
   
       console.log("Form Data : " + formData.get('image'));
 
+
     }
        
     
 }, [submitResize]);
+useEffect(()=>{
+  if (submitResize) {
 
+    
+
+    setTimeout(()=>{
+
+      fetch('http://127.0.0.1:8000/api/show-resize-data/',{
+      method: 'GET',
+    }
+      ).then(response => response.json())
+  .then(data => setImg(data.image))
+  .catch(error => console.error(error));
+
+
+  console.log("Resized Img Ghulam Ali bhai");
+
+    },2000);
+
+  }
+     
+  
+}, [submitResize]);
 
 useEffect(()=>{
   if (submitFlip) {
