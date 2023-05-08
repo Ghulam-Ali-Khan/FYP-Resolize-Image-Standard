@@ -129,29 +129,39 @@ def filterImg(imgPath, filter):
     imgRead = cv2.imread(imgPath, 1) 
     imgRead = cv2.cvtColor(imgRead, cv2.COLOR_BGR2RGB) # convert to RGB
 
+    print("Filter Value :"+ filter)
 
     if(filter=="Gaussian"):
-        # Define the filter kernel
-        kernel = cv2.getGaussianKernel(5, 0)
-        # Apply the filter
+        print("Gaussian")
+        kernel_size = 21 # increase the kernel size for more blurring effect
+        kernel = cv2.getGaussianKernel(kernel_size, 0)
         filtered_img = cv2.filter2D(imgRead, -1, kernel)
-    elif(filter=="Median"):
-        filtered_img = cv2.medianBlur(imgRead, 5)
-    elif(filter=="Bilateral"):
-        filtered_img = cv2.bilateralFilter(imgRead, 9, 75, 75)
-    elif(filter=="Laplacian"):
-        filtered_img = cv2.Laplacian(imgRead, cv2.CV_64F)
-    elif(filter=="Sobel"):
-        gray_img = cv2.cvtColor(imgRead, cv2.COLOR_BGR2GRAY)
-        grad_x = cv2.Sobel(gray_img, cv2.CV_64F, 1, 0, ksize=3)
-        grad_y = cv2.Sobel(gray_img, cv2.CV_64F, 0, 1, ksize=3)
-        filtered_img = cv2.addWeighted(grad_x, 0.5, grad_y, 0.5, 0)
 
-    # Convert image data type to unsigned 8-bit integers
-    filtered_img = cv2.convertScaleAbs(filtered_img)
+    elif(filter=="Median"):
+        print("Median")
+        filtered_img = cv2.medianBlur(imgRead, 15) # increase the kernel size for more blurring effect
+
+    elif(filter=="Bilateral"):
+        print("Bilateral")
+        filtered_img = cv2.bilateralFilter(imgRead, 9, 75, 75)
+
+    elif(filter=="Laplacian"):
+        print("Laplacian")
+        gray_img = cv2.cvtColor(imgRead, cv2.COLOR_BGR2GRAY)
+        filtered_img = cv2.Laplacian(gray_img, cv2.CV_8U) # increase the depth of the output image
+
+    elif(filter=="Sobel"):
+        print("Sobel")
+        gray_img = cv2.cvtColor(imgRead, cv2.COLOR_BGR2GRAY)
+        grad_x = cv2.Sobel(gray_img, cv2.CV_16S, 1, 0, ksize=3)
+        grad_y = cv2.Sobel(gray_img, cv2.CV_16S, 0, 1, ksize=3)
+        abs_grad_x = cv2.convertScaleAbs(grad_x)
+        abs_grad_y = cv2.convertScaleAbs(grad_y)
+        filtered_img = cv2.addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0)
 
     # Convert image to Pillow format
     pillow_img = PillowImage.fromarray(filtered_img)
+    
 
     # Save image as PNG
     buffer = BytesIO()
@@ -316,7 +326,20 @@ def get_flip_data(req):
 @api_view(['POST'])
 def get_filter_data(req):
     if req.method == 'POST':
-        serializer = FilterImageSerializer(data=req.data)
+
+        imagy = save_base64_image('my_image', req.data['image'])
+        filter_type = req.data['filter_type']
+        
+        base64_string = filterImg('my_image.png', filter_type)
+        # context = {'data': base64_string}
+        data_copy = req.data.copy()
+        data_copy['image'] =  base64_string
+        
+        
+        os.remove('my_image.png')
+
+
+        serializer = FilterImageSerializer(data=data_copy)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
@@ -353,3 +376,9 @@ def show_fliped_data(request):
     data = {"id" : latest_object.id, "image_name": latest_object.image_name, "image": latest_object.image }
     return JsonResponse(data, safe=False)
 
+def show_filter_data(request):
+
+    latest_object = FilterImage.objects.latest('created')
+    print(latest_object)
+    data = {"id" : latest_object.id, "image_name": latest_object.image_name, "image": latest_object.image }
+    return JsonResponse(data, safe=False)
