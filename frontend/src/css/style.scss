@@ -557,3 +557,19 @@ $theme_blue : #0170e3;
     }
 
 }
+// Download Btn
+
+.download-btn{
+    margin: auto;
+    background-color: $theme_blue;
+    @include btns-font();
+    @include btn-style-1();
+    border: 2px solid white;
+
+    &:hover {
+        background-color: white;
+        border: 2px solid $theme_blue;
+        color: $theme_blue;
+        text-decoration: none;
+    }   
+}

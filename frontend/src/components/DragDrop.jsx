@@ -369,8 +369,16 @@ useEffect(()=>{
         </div>
       </div>
 
+
+      {!flag && (<a href={img} className="download-btn" download>    <span className="material-symbols-outlined">cloud_download</span> Download</a>) }  
+
+
       <img src={img} alt="" className="preview-img" />
 
+
+      
+        
+        
 
 
     </>
