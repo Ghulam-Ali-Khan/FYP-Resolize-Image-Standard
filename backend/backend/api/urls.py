@@ -12,4 +12,5 @@ urlpatterns = [
     path('show-resize-data/', show_resized_data),
     path('show-fliped-data/', show_fliped_data),
     path('show-filter-data/', show_filter_data),
+    path('show-resolize-data/', show_resolize_data),
 ]

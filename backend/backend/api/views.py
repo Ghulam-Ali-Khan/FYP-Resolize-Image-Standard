@@ -195,14 +195,14 @@ def resolizeImg(imgPath):
     # Save image as PNG
     buffer = BytesIO()
     pillow_img.save(buffer, format='PNG')
-    file_path = f"filtered_img.png"
+    file_path = f"resolize_img.png"
     default_storage.save(file_path, ContentFile(buffer.getvalue()))
         
-    with open("filtered_img.png", 'rb') as f:
+    with open("resolize_img.png", 'rb') as f:
         image_data = f.read()
         
-    base64_string = image_to_base64("filtered_img.png", image_data)
-    os.remove('filtered_img.png')
+    base64_string = image_to_base64("resolize_img.png", image_data)
+    os.remove('resolize_img.png')
 
     return base64_string
 
@@ -351,7 +351,15 @@ def get_filter_data(req):
 @api_view(['POST'])
 def get_resolized_data(req):
     if req.method == 'POST':
-        serializer = ResolizeImageSerializer(data=req.data)
+
+        imagy = save_base64_image('my_image', req.data['image'])
+    
+        base64_string = resolizeImg('my_image.png')
+
+        data_copy = req.data.copy()
+        data_copy['image'] =  base64_string
+        os.remove('my_image.png')
+        serializer = ResolizeImageSerializer(data=data_copy)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
@@ -379,6 +387,13 @@ def show_fliped_data(request):
 def show_filter_data(request):
 
     latest_object = FilterImage.objects.latest('created')
+    print(latest_object)
+    data = {"id" : latest_object.id, "image_name": latest_object.image_name, "image": latest_object.image }
+    return JsonResponse(data, safe=False)
+
+def show_resolize_data(request):
+
+    latest_object = ResolizeImage.objects.latest('created')
     print(latest_object)
     data = {"id" : latest_object.id, "image_name": latest_object.image_name, "image": latest_object.image }
     return JsonResponse(data, safe=False)
